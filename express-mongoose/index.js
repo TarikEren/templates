@@ -6,12 +6,14 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 async function startServer() {
     await mongoose.connect(DB_URL)
