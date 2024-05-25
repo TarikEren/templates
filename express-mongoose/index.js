@@ -15,13 +15,16 @@ app.use(bodyParser.json());
 
 async function startServer() {
     await mongoose.connect(DB_URL)
-        .then(console.log("Connected to the database"))
+        .then(() => {
+            console.log("Connected to the database");
+            app.listen(PORT, (req, res) => {
+                console.log(`Server listening on port ${PORT}`);
+            });
+        })
         .catch((err) => {
             console.error(err);
         });
-        app.listen(PORT, (req, res) => {
-            console.log(`Server listening on port ${PORT}`);
-        });
+
 }
 
 startServer();
